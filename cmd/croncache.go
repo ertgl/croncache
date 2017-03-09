@@ -33,6 +33,8 @@ var (
 )
 
 func init() {
+	flag.Parse()
+
 	app = croncache.NewApplication()
 	err := app.Initialize()
 	if err != nil {
