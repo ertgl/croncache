@@ -146,18 +146,17 @@ chmod a+x test.py
 
 - Type the following codes.
 
-    -
-      ```
-      redis-cli
-      ```
-    -
-      ```
-      HMGET vals rand
-      ```
-    -
-      ```
-      GET rand
-      ```
+```
+redis-cli
+```
+      
+```
+HMGET vals rand
+```
+      
+```
+GET rand
+```
 
 
 ## License
