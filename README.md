@@ -20,7 +20,7 @@ go build croncache.go
 
 
 
-Example
+Tutorial
 -----------
 
 
