@@ -47,26 +47,6 @@ func init() {
 	}
 	app.SetIoC(iocGenerator())
 
-	executerGenerator, err := croncache.ExecuterRepository().Resolve(executerModuleName)
-	if err != nil {
-		croncache.HandleFatalError(err)
-	}
-	app.IoC().SetExecuter(executerGenerator())
-	err = app.IoC().Executer().Initialize()
-	if err != nil {
-		croncache.HandleFatalError(err)
-	}
-
-	taskManagerGenerator, err := croncache.TaskManagerRepository().Resolve(taskManagerModuleName)
-	if err != nil {
-		croncache.HandleFatalError(err)
-	}
-	app.IoC().SetTaskManager(taskManagerGenerator())
-	err = app.IoC().TaskManager().Initialize()
-	if err != nil {
-		croncache.HandleFatalError(err)
-	}
-
 	nodeGenerator, err := croncache.NodeRepository().Resolve(nodeModuleName)
 	if err != nil {
 		croncache.HandleFatalError(err)
@@ -80,7 +60,30 @@ func init() {
 	if err != nil {
 		croncache.HandleFatalError(err)
 	}
+
+	executerGenerator, err := croncache.ExecuterRepository().Resolve(executerModuleName)
+	if err != nil {
+		croncache.HandleFatalError(err)
+	}
+	app.IoC().SetExecuter(executerGenerator())
+
+	taskManagerGenerator, err := croncache.TaskManagerRepository().Resolve(taskManagerModuleName)
+	if err != nil {
+		croncache.HandleFatalError(err)
+	}
+	app.IoC().SetTaskManager(taskManagerGenerator())
+
 	err = app.IoC().Node().Initialize()
+	if err != nil {
+		croncache.HandleFatalError(err)
+	}
+
+	err = app.IoC().Executer().Initialize()
+	if err != nil {
+		croncache.HandleFatalError(err)
+	}
+
+	err = app.IoC().TaskManager().Initialize()
 	if err != nil {
 		croncache.HandleFatalError(err)
 	}

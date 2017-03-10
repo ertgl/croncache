@@ -25,7 +25,6 @@ func (t *Task) Initialize() error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
 	t.logger = log.New(f, fmt.Sprintf("[%s] ", t.Name), log.LstdFlags|log.Llongfile)
 	t.logger.SetOutput(f)
 	return err
