@@ -1,7 +1,7 @@
 # Croncache
 
 Croncache is an automation tool which helps developers to cache data actively
-with macros in any programming language that supports JSON.
+with JSON macros in any programming language.
 
 
 ## Installation
