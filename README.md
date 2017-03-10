@@ -136,7 +136,9 @@ chmod a+x test.py
 
 - Run an instance of Croncache specifying the config file by typing the following code.
 
-`./croncache --config="node.json"`
+```
+./croncache --config="node.json"
+```
 
 
 #### 3. Correct everything works
@@ -144,9 +146,18 @@ chmod a+x test.py
 
 - Type the following codes.
 
-    - `redis-cli`
-    - `HMGET vals rand`
-    - `GET rand`
+    -
+      ```
+      redis-cli
+      ```
+    -
+      ```
+      HMGET vals rand
+      ```
+    -
+      ```
+      GET rand
+      ```
 
 
 ## License
