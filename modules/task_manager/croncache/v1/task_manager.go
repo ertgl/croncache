@@ -115,7 +115,7 @@ func (tm *TaskManager) Process(task *models.Task) {
 			for !tm.IoC().Node().IsHalted() {
 				err := tm.runTask(task)
 				if err != nil {
-					task.Log().Fatalln(err)
+					task.Log().Println(err)
 					iter++
 					if iter <= task.IterationOnFail {
 						task.Log().Println(fmt.Sprintf(
@@ -141,17 +141,17 @@ func (tm *TaskManager) Run() {
 			var task *models.Task
 			raw, err := ioutil.ReadFile(taskFilePath)
 			if err != nil {
-				tm.IoC().Node().Log().Fatalln(taskFilePath, err)
+				tm.IoC().Node().Log().Println(taskFilePath, err)
 				continue
 			}
 			err = json.Unmarshal(raw, &task)
 			if err != nil {
-				tm.IoC().Node().Log().Fatalln(taskFilePath, err)
+				tm.IoC().Node().Log().Println(taskFilePath, err)
 				continue
 			}
 			err = task.Initialize()
 			if err != nil {
-				tm.IoC().Node().Log().Fatalln(taskFilePath, err)
+				tm.IoC().Node().Log().Println(taskFilePath, err)
 				continue
 			}
 			tm.IoC().Node().WaitGroup().Add(1)

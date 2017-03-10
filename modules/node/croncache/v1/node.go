@@ -42,15 +42,10 @@ func (n *Node) Initialize() error {
 	if err != nil {
 		return err
 	}
-	defer f.Close()
 	n.logger = log.New(f, "[Node] ", log.LstdFlags|log.Llongfile)
 	n.logger.SetOutput(f)
-	croncache.HandleFatalError = n.Log().Fatalln
+	croncache.HandleFatalError = n.Log().Println
 	err = n.IoC().TaskManager().ImportConfig(*n.config.TaskManager)
-	if err != nil {
-		return err
-	}
-	err = n.IoC().TaskManager().Initialize()
 	if err != nil {
 		return err
 	}
