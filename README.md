@@ -9,11 +9,11 @@ with JSON macros in any programming language.
 You can use Croncache both as a `Go` library (If you want to change a specific module
 inside it, thanks to `IoC`) or standalone application (with a `supervisor` app.).
 
-```
+```sh
 go get -u -v github.com/ertgl/croncache
 ```
 
-```
+```sh
 cd $GOPATH/src/github.com/ertgl/croncache/cmd
 go build croncache.go
 ```
@@ -35,7 +35,7 @@ Before starting to use Croncache, you need to have installed a backend that Cron
 - Create a config file with the content below.
 
 `node.json`
-```
+```json
 {
   "LogFilePath": "node.log",
   "TaskManager": {
@@ -50,7 +50,7 @@ Before starting to use Croncache, you need to have installed a backend that Cron
 - Create a task file with the content below.
 
 `task_test.json`
-```
+```json
 {
   "Name": "test",
   "Command": "./test.py",
@@ -79,7 +79,7 @@ Before starting to use Croncache, you need to have installed a backend that Cron
 - Create the script file to make some datas cached.
 
 `test.py`
-```
+```python
 #!/usr/bin/env python
 # -*- coding: UTF-8 -*-
 
@@ -127,7 +127,7 @@ if __name__ == '__main__':
 
 - Make the script file executable by typing the following code.
 
-```
+```sh
 chmod a+x test.py
 ```
 
@@ -136,7 +136,7 @@ chmod a+x test.py
 
 - Run an instance of Croncache specifying the config file by typing the following code.
 
-```
+```sh
 ./croncache --config="node.json"
 ```
 
@@ -146,15 +146,15 @@ chmod a+x test.py
 
 - Type the following codes.
 
-```
+```sh
 redis-cli
 ```
       
-```
+```sh
 HMGET vals rand
 ```
       
-```
+```sh
 GET rand
 ```
 
