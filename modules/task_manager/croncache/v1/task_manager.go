@@ -12,6 +12,7 @@ import (
 	"github.com/ertgl/croncache"
 	"github.com/ertgl/croncache/lib"
 	"github.com/ertgl/croncache/models"
+	"github.com/ertgl/croncache/utils"
 )
 
 var (
@@ -134,6 +135,7 @@ func (tm *TaskManager) Process(task *models.Task) {
 
 func (tm *TaskManager) Run() {
 	for _, taskFilePath := range tm.config.Tasks {
+		taskFilePath = utils.ReplaceOSVariables(taskFilePath)
 		select {
 		case <-tm.IoC().Node().HaltSignal():
 			return
