@@ -10,6 +10,7 @@ import (
 import (
 	"github.com/ertgl/croncache"
 	"github.com/ertgl/croncache/lib"
+	"github.com/ertgl/croncache/utils"
 )
 
 type Node struct {
@@ -38,6 +39,7 @@ func (n *Node) ModuleName() string {
 }
 
 func (n *Node) Initialize() error {
+	n.config.LogFilePath = utils.ReplaceOSVariables(n.config.LogFilePath)
 	f, err := os.OpenFile(n.config.LogFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 755)
 	if err != nil {
 		return err

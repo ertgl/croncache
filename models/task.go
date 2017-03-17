@@ -7,6 +7,10 @@ import (
 	"os"
 )
 
+import (
+	"github.com/ertgl/croncache/utils"
+)
+
 type Task struct {
 	Name                   string
 	Command                string
@@ -21,6 +25,7 @@ type Task struct {
 }
 
 func (t *Task) Initialize() error {
+	t.LogFilePath = utils.ReplaceOSVariables(t.LogFilePath)
 	f, err := os.OpenFile(t.LogFilePath, os.O_CREATE|os.O_WRONLY|os.O_APPEND, 755)
 	if err != nil {
 		return err
