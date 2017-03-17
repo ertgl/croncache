@@ -9,6 +9,7 @@ import (
 import (
 	"github.com/ertgl/croncache/lib"
 	"github.com/ertgl/croncache/models"
+	"github.com/ertgl/croncache/utils"
 )
 
 type Executer struct {
@@ -46,6 +47,10 @@ func (e *Executer) SetIoC(ioc lib.IoC) {
 
 func (e *Executer) Execute(command string, args ...string) (models.Cache, error) {
 	cache := models.Cache{}
+	command = utils.ReplaceOSVariables(command)
+	for _, arg := range args {
+		arg = utils.ReplaceOSVariables(arg)
+	}
 	out, err := exec.Command(command, args...).Output()
 	if err != nil {
 		return cache, err
