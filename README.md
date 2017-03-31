@@ -10,7 +10,7 @@ You can use Croncache both as a `Go` library (If you want to change a specific m
 inside it, thanks to `IoC`) or standalone application (with a `supervisor` app.).
 
 ```sh
-go get -u -v github.com/ertgl/croncache
+go get -u -v github.com/ertgl/croncache/...
 ```
 
 ```sh
