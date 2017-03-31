@@ -1,0 +1,23 @@
+{
+	"version": 0,
+	"dependencies": [
+		{
+			"importpath": "github.com/mediocregopher/radix.v2/pool",
+			"repository": "https://github.com/mediocregopher/radix.v2",
+			"vcs": "git",
+			"revision": "1ac54a28f5934ea5e08f588647e734aba2383cb8",
+			"branch": "master",
+			"path": "/pool",
+			"notests": true
+		},
+		{
+			"importpath": "github.com/mediocregopher/radix.v2/redis",
+			"repository": "https://github.com/mediocregopher/radix.v2",
+			"vcs": "git",
+			"revision": "1ac54a28f5934ea5e08f588647e734aba2383cb8",
+			"branch": "master",
+			"path": "redis",
+			"notests": true
+		}
+	]
+}
