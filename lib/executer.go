@@ -6,5 +6,5 @@ import (
 
 type Executer interface {
 	Dependency
-	Execute(command string, args ...string) (models.Cache, error)
+	Execute(command string, timeout models.Duration, args ...string) (models.Cache, error)
 }

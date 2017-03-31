@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"encoding/json"
 	"os/exec"
+	"time"
 )
 
 import (
@@ -45,13 +46,34 @@ func (e *Executer) SetIoC(ioc lib.IoC) {
 	}
 }
 
-func (e *Executer) Execute(command string, args ...string) (models.Cache, error) {
+func (e *Executer) Execute(command string, timeout models.Duration, args ...string) (models.Cache, error) {
 	cache := models.Cache{}
 	command = utils.ReplaceOSVariables(command)
 	for _, arg := range args {
 		arg = utils.ReplaceOSVariables(arg)
 	}
-	out, err := exec.Command(command, args...).Output()
+	cmd := exec.Command(command, args...)
+	done := make(chan int, 1)
+	e.IoC().Node().WaitGroup().Add(1)
+	go func(cmd *exec.Cmd, timeout models.Duration, done chan int) {
+		defer func() {
+			e.IoC().Node().WaitGroup().Done()
+		}()
+	Waiting:
+		for {
+			select {
+			case <-done:
+				break Waiting
+			case <-time.After(timeout.Duration):
+				cmd.Process.Kill()
+				break Waiting
+			}
+		}
+	}(cmd, timeout, done)
+	out, err := cmd.Output()
+	select {
+	case done <- 1:
+	}
 	if err != nil {
 		return cache, err
 	}

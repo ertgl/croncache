@@ -70,6 +70,7 @@ func (tm *TaskManager) runTask(task *models.Task) error {
 	go func(ch chan models.Cache, errChan chan error) {
 		cache, err := tm.IoC().Executer().Execute(
 			task.Command,
+			task.Timeout,
 			task.Args...,
 		)
 		if err != nil {
