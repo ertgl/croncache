@@ -99,3 +99,8 @@ func (ce *CacheEngine) Upsert(cache models.Cache) error {
 	ce.connPool.Put(conn)
 	return nil
 }
+
+func(ce *CacheEngine) Close() error {
+	ce.connPool.Empty()
+	return nil
+}

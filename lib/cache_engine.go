@@ -8,4 +8,5 @@ type CacheEngine interface {
 	Dependency
 	Configurable
 	Upsert(models.Cache) error
+	Close() error
 }
