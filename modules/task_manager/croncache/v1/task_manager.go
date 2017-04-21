@@ -96,6 +96,7 @@ func (tm *TaskManager) runTask(task *models.Task) error {
 		if err != nil {
 			return err
 		}
+		defer cacheEngine.Close()
 		err = cacheEngine.Upsert(cache)
 		if err != nil {
 			return err
